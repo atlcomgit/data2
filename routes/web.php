@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Cache::flush();
-// dd(Cache::get('1'));
+// dd(Cache::get('2'));
 // Cache::put('1', ' 2222222222',);
 
 Route::view('/', 'home.index')->name('home')->middleware('log');
