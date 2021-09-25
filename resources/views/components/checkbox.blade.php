@@ -1,17 +1,36 @@
+{{-- <x-checkbox label="{{ __('Запомнить') }}" name="remember" checked /> --}}
+
 @props([
-    'label' => '',
-    'name' => '',
+    'label' => null,
+    'name' => null,
     'required' => false,
     'checked' => null,
 ])
-@php($id = Str::uuid())
-@unless($checked) {{ $checked = old($name) }} @endunless
+
+@php
+    //dump(request()->old());
+    $id = Str::uuid();
+    if (!empty(request()->old())) $checked = old($name);
+@endphp
+
 
 <div class="mb-3">
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="{{ $id }}" name="{{ $name }}" {{ !!$checked ? 'checked' : '' }}>
-        @if ($label)
-            <label class="form-check-label{{ !!$required ? ' required' : '' }}" for="{{ $id }}">{{ $label }}</label>
-        @endif
+        <input
+            id="{{ $id }}"
+            class="form-check-input"
+            type="checkbox"
+            @isset($name) name="{{ $name }}" @endisset
+            {{ !!$checked ? 'checked' : '' }}
+            >
+
+        @isset($label)
+            <label
+                class="form-check-label{{ !!$required ? ' required' : '' }}"
+                for="{{ $id }}"
+            >
+                {{ $label }}
+            </label>
+        @endisset
     </div>
 </div>

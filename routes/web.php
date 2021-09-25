@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModuleController;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -20,29 +21,23 @@ use Illuminate\Support\Facades\Route;
 // dd(Cache::get('2'));
 // Cache::put('1', ' 2222222222',);
 
-Route::view('/', 'home.index')->name('home')->middleware('log');
-Route::redirect('/home', '/');
+Route::redirect('/home', '/')->name('home');
+Route::get('/', HomeController::class)->name('pages.home')->middleware('log');
+// Route::view('/', 'home.index')->name('pages.home')->middleware('log');
+//Route::redirect('/module', '/login');
 
 Route::middleware('guest')->group(function () {
-    Route::redirect('modules', 'module')->name('modules');
-    //Route::redirect('module', 'login');
-
-    Route::get('login', [LoginController::class, 'index'])->name('login');
-    Route::post('login', [LoginController::class, 'store'])->name('login.store');
-
-    Route::get('module', [ModuleController::class, 'index'])->name('module');
-    Route::get('module/{module}', [ModuleController::class, 'show'])->name('module.show');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/login', [AuthController::class, 'login'])->name('pages.auth.login');
+    Route::post('/login', [AuthController::class, 'check'])->name('pages.auth.login.check');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('pages.auth.logout');
+});
 
-// Route::middleware('auth')->group(function () {
-//     Route::redirect('modules', 'module');
-
-//     Route::get('module', [ModuleController::class, 'index'])->name('module');
-//     Route::get('module/{module}', [ModuleController::class, 'show'])->name('module.show');
-// });
-
-// Route::prefix('module')->as('module.')->group(function () {
-//     Route::get('module')->name('module');
-//     Route::get('{id}', [ModuleController::class, 'show'])->name('show');
+//Route::prefix('module')->as('pages.')->group(function () {
+Route::redirect('/modules', '/module')->name('pages.modules');
+Route::get('/module', [ModuleController::class, 'index'])->name('pages.modules');
+Route::get('/module/{module}', [ModuleController::class, 'show'])->name('pages.module.show');
 // });

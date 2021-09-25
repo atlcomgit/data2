@@ -1,4 +1,4 @@
-<?php
+<?php // php artisan migrate --seed
 
 namespace Database\Seeders;
 
@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(1)->create([
+            'name' => 'alek',
+            'email' => 'alek@atlcom.ru',
+            'password' => bcrypt('12343456'),
+            'active' => true,
+        ]); // создать случайного пользователя
     }
 }

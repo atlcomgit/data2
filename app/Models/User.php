@@ -12,12 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $connection = 'mysql';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected $fillable = [
+    protected $fillable = [ // поля обязательные для заполнения
         'name',
         'email',
         'password',
@@ -28,7 +30,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = [ // скрытые поля в массиве модели
         'password',
         'remember_token',
     ];
@@ -38,7 +40,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
+    protected $casts = [ // преобразование полей в другой тип
         'email_verified_at' => 'datetime',
     ];
 }

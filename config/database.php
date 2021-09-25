@@ -46,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_LOCAL_HOST', '127.0.0.1'),
+            'port' => env('DB_LOCAL_PORT', '3306'),
+            'database' => env('DB_LOCAL_DATABASE', 'forge'),
+            'username' => env('DB_LOCAL_USERNAME', 'forge'),
+            'password' => env('DB_LOCAL_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -78,15 +78,27 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'sqlsrv' => [
+        'sqlsrv_cis' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
+            'host' => env('DB_CIS_HOST', 'localhost'),
+            'port' => env('DB_CIS_PORT', '1433'),
+            'database' => env('DB_CIS_DATABASE', 'forge'),
+            'username' => env('DB_CIS_USERNAME', 'forge'),
+            'password' => env('DB_CIS_PASSWORD', ''),
+            'charset' => 'windows-1251',
+            'prefix' => '',
+            'prefix_indexes' => true,
+        ],
+        'sqlsrv_web' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_WEB_HOST', 'localhost'),
+            'port' => env('DB_WEB_PORT', '1433'),
+            'database' => env('DB_WEB_DATABASE', 'forge'),
+            'username' => env('DB_WEB_USERNAME', 'forge'),
+            'password' => env('DB_WEB_PASSWORD', ''),
+            'charset' => 'windows-1251',
             'prefix' => '',
             'prefix_indexes' => true,
         ],
@@ -123,7 +135,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
