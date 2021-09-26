@@ -25,6 +25,7 @@ Route::redirect('/home', '/')->name('home');
 Route::get('/', HomeController::class)->name('pages.home')->middleware('log');
 // Route::view('/', 'home.index')->name('pages.home')->middleware('log');
 //Route::redirect('/module', '/login');
+// Route::get('/', function () { return view('pages.home.index'); });
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

@@ -8,5 +8,13 @@
 @endsection
 
 @section('content')
-    @include("extends.$module")
+    <x-vue-content>
+        @include("extends.$module")
+    </x-vue-content>
 @endsection
+
+@once
+    @push('js')
+        <script src="/js/app.vue.js"></script>
+    @endpush
+@endonce

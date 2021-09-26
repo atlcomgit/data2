@@ -25,23 +25,27 @@ class ModuleController extends Controller
     public function show($module)
     {
         return view('pages.modules.show', [
+            'status' => true,
             'module' => $module,
-            'data' => $this->getData($module),
+            'data' => $this->getData($module, 'web'),
         ]);
     }
-    public function getData($module)
+    public static function getData($module, $route = 'web')
     {
+        $data = [];
+
         switch ($module) {
             case 'online':
+                if ($route == 'web') break;
+
                 $data = DB::connection('sqlsrv_web')->select("
                 SELECT * FROM WEB.dbo.Online
                     ORDER BY olnBye,
                         (CASE WHEN olnCityName='Томск' AND olnUserCode='33333333' THEN 1 ELSE 0 END),
                         olnCityName,olnAgencyName,olnUserName,olnIP                
                     ");
-                // foreach ($_dbs as $_db) dd($_db);
-                return $data;
                 break;
         }
+        return $data;
     }
 }

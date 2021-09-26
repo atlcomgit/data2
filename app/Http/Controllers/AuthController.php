@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -27,12 +28,11 @@ class AuthController extends Controller
         // ]);
 
         $login = $request->input('login');
-        //$email = $request->input('email');
         $password = $request->input('password');
         $remember = $request->boolean('remember');
         //$file = $request->file('photo');
 
-        $user = User::whereRaw("name='$login' OR email='$login'")->first();
+        $user = User::whereRaw("(name='$login' OR email='$login') AND active=1")->first();
 
         if (!empty($user) && Hash::check($password, $user->password)) {
             if (Auth::guard('web')->attempt(['email' => $login, 'password' => $password], $remember)) {
