@@ -1,0 +1,36 @@
+[
+    {
+        "type": "File",
+        "name": "c:\\OpenServer\\domains\\data2\\resources\\views\\extends\\html.blade.php",
+        "parent_id": null,
+        "fsPath": "c:\\OpenServer\\domains\\data2\\resources\\views\\extends\\html.blade.php",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "OSQqMx5ihGvfcH7Z"
+    },
+    {
+        "type": "File",
+        "name": "c:\\OpenServer\\domains\\data2\\resources\\views\\extends\\online.blade.php",
+        "parent_id": null,
+        "fsPath": "c:\\OpenServer\\domains\\data2\\resources\\views\\extends\\online.blade.php",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "cWpYLCj46ldPNQu0"
+    },
+    {
+        "type": "Group",
+        "name": "Laravel",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "N91DSWF2lvR8sZ5w"
+    },
+    {
+        "type": "Group",
+        "name": "Vue",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "NxYGXZiwMthcd1pv"
+    }
+]

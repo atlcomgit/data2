@@ -10,7 +10,21 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/data2.css">
+    
     @stack('css')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    {{-- <script src="https://unpkg.com/vue@next" preload></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" preload></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" preload></script>
+    
+    {{-- <script>
+        window.__VUE_DEVTOOLS_HOST__ = 'data2.test' // default: localhost
+        window.__VUE_DEVTOOLS_PORT__ = '8098' // default: 8098
+    </script>
+    <script src="http://data2.test:8098"></script> --}}
+
+    @stack('js')
 </head>
 
 <body class="m-0">
@@ -27,6 +41,8 @@
         <tr><td align="@yield('page-align-h','left')" valign="@yield('page-align-v','top')" style="position: relative;">
                 
                     <content class='flex-grow-1 py-3'>
+                        @yield('content-style')
+                        @yield('content-script')
                         @yield('content')
                     </content>
                 
@@ -40,11 +56,5 @@
         </tr>
     </table>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    @stack('js')
-
 </body>
-
 </html>

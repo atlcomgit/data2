@@ -12,8 +12,9 @@ class ApiController extends Controller
         //$data = json_decode($request->getContent());
         return response()->json([
             'status' => true,
-            'module' => $request->module,
-            'data' => \App\Http\Controllers\ModuleController::getData($request->module, 'api'),
+            'module_name' => $request->module,
+            'module_sid' => $request->sid,
+            'module_data' => \App\Http\Controllers\ModuleController::getData($request->module, $request->sid, 'api'),
         ]);
     }
 

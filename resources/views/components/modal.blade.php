@@ -1,3 +1,5 @@
+{{-- <x-modal title="Title" ok="Ok" cancel="Закрыть"></x-modal> --}}
+
 @props([
     'title' => "",
     'ok' => "Ok",
@@ -5,7 +7,7 @@
     ])
    
 <div class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" ref="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ $title }}</h5>
@@ -27,7 +29,3 @@
         </div>
     </div>
   </div>
-
-  <script>
-
-  </script>

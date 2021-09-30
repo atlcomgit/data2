@@ -2,7 +2,7 @@
 
 return [
     'modules' => [
-        'online' => 'Посетители в Online',
+        'online' => 'Пользователи Online',
         'pay' => 'Оплаченные счета',
     ],
 

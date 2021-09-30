@@ -27,25 +27,41 @@ class ModuleController extends Controller
         return view('pages.modules.show', [
             'status' => true,
             'module' => $module,
+            'ip' => request()->ip(),
             'data' => $this->getData($module, 'web'),
         ]);
     }
-    public static function getData($module, $route = 'web')
+
+    public static function getData($module, $sid = null, $route = 'web')
     {
-        $data = [];
+        $_data = [];
 
         switch ($module) {
             case 'online':
                 if ($route == 'web') break;
 
-                $data = DB::connection('sqlsrv_web')->select("
-                SELECT * FROM WEB.dbo.Online
-                    ORDER BY olnBye,
-                        (CASE WHEN olnCityName='Томск' AND olnUserCode='33333333' THEN 1 ELSE 0 END),
-                        olnCityName,olnAgencyName,olnUserName,olnIP                
-                    ");
+                if ($sid === null) {
+                    $_dbs = DB::connection('sqlsrv_web')->select("
+                    SELECT * FROM WEB.dbo.Online
+                        ORDER BY olnBye,
+                            (CASE WHEN olnCityName='Томск' AND olnUserCode='33333333' THEN 1 ELSE 0 END),
+                            olnCityName,olnAgencyName,olnUserName,olnIP                
+                        ");
+                    foreach ($_dbs as $_db) $_data[] = (object) [
+                        'sid' => module_id($module, $_db),
+                        'class' => module_class($module, $_db),
+                        'city' => module_column('olnCityName', $_db),
+                        'agency' => module_column('olnAgencyName', $_db),
+                        'status' => module_column('olnStatus', $_db),
+                    ];
+                } else {
+                    $_data = DB::connection('sqlsrv_web')->selectOne("
+                    SELECT TOP 1 * FROM WEB.dbo.Online
+                        WHERE LOWER(CONVERT(VARCHAR(32),HASHBYTES('MD5',olnCityCode+olnUserCode+olnUserASN+olnUserPhone+olnIP),2))='$sid'
+                        ");
+                }
                 break;
         }
-        return $data;
+        return $_data;
     }
 }

@@ -3,3 +3,7 @@
     cursor: default;
     pointer-events: none;
 }
+
+.vue {
+    visibility: hidden;
+}
